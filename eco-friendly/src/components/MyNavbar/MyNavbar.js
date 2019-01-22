@@ -48,4 +48,3 @@ class MyNavbar extends React.Component {
 }
 
 export default MyNavbar;
-
