@@ -1,0 +1,54 @@
+{
+    "ecoPoints0": {
+      "category": "food",
+      "name": "apple",
+      "points": 6,
+      "uid": "sogxtNXO5Tg3LGeaCyw5izGMsbQ2"
+    },
+    "ecoPoints1": {
+      "category": "food",
+      "name": "tempeh",
+      "points": "10",
+      "uid": "sogxtNXO5Tg3LGeaCyw5izGMsbQ2"
+    },
+    "ecoPoints3": {
+      "category": "recycle",
+      "name": "resuable spoon",
+      "points": "10",
+      "uid": "sogxtNXO5Tg3LGeaCyw5izGMsbQ2"
+    },
+
+    "ecoPoints4": {
+      "category": "recycle",
+      "name": "paper straw",
+      "points": "10",
+      "uid": "sogxtNXO5Tg3LGeaCyw5izGMsbQ2"
+    },
+
+    "ecoPoints5": {
+      "category": "transportation",
+      "name": "bike to work",
+      "points": "10",
+      "uid": "sogxtNXO5Tg3LGeaCyw5izGMsbQ2"
+    },
+
+    "ecoPoints6": {
+      "category": "transportation",
+      "name": "city bus",
+      "points": "10",
+      "uid": "sogxtNXO5Tg3LGeaCyw5izGMsbQ2"
+    },
+
+    "ecoPoints7": {
+      "category": "personal care",
+      "name": "lemon juice",
+      "points": "10",
+      "uid": "sogxtNXO5Tg3LGeaCyw5izGMsbQ2"
+    },
+    "ecoPoints8": {
+      "category": "personal care",
+      "name": "facewash with no plastic",
+      "points": "10",
+      "uid": "sogxtNXO5Tg3LGeaCyw5izGMsbQ2"
+    },
+
