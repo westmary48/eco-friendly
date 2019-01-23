@@ -4,29 +4,29 @@ import apiKeys from '../apiKeys';
 const firebaseUrl = apiKeys.firebaseConfig.databaseURL;
 
 const getAllEcopoints = () => new Promise((resolve, reject) => {
-  axios.get(`${firebaseUrl}/articles.json`)
+  axios.get(`${firebaseUrl}/ecopoints.json`)
     .then((result) => {
-      const articleObject = result.data;
-      const articleArray = [];
-      if (articleObject != null) {
-        Object.keys(articleObject).forEach((articleId) => {
-          articleObject[articleId].id = articleId;
-          articleArray.push(articleObject[articleId]);
+      const ecopointsObject = result.data;
+      const ecopointsArray = [];
+      if (ecopointsObject != null) {
+        Object.keys(ecopointsObject).forEach((ecopointId) => {
+          ecopointsObject[ecopointId].id = ecopointId;
+          ecopointsArray.push(ecopointsObject[ecopointId]);
         });
       }
-      resolve(articleArray);
+      resolve(ecopointsArray);
     })
     .catch((error) => {
       reject(error);
     });
 });
-const deletePoint = articleId => axios.delete(`${firebaseUrl}/articles/${articleId}.json`);
+const deletePoint = ecopointId => axios.delete(`${firebaseUrl}/ecopoints/${ecopointId}.json`);
 
-const postRequest = newArticle => axios.post(`${firebaseUrl}/articles.json`, newArticle);
+const postRequest = newEcopoint => axios.post(`${firebaseUrl}/ecpoints.json`, newEcopoint);
 
-const getSinglePoint = articleId => axios.get(`${firebaseUrl}/articles/${articleId}.json`);
+const getSinglePoint = ecopointId => axios.get(`${firebaseUrl}/ecopints/${ecopointId}.json`);
 
-const updateEcopoint = (articleId, article) => axios.put(`${firebaseUrl}/articles/${articleId}.json`, article);
+const updateEcopoint = (ecopointId, ecopoint) => axios.put(`${firebaseUrl}/ecopoints/${ecopointId}.json`, ecopoint);
 
 export default {
   getAllEcopoints,
