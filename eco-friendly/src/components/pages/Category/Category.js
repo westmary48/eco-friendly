@@ -1,24 +1,23 @@
 import React from 'react';
-import ecopointsShape from '../../../helpers/propz/ecopointShape';
-import './Category.scss';
+import ecopointShape from '../../../helpers/propz/ecopointShape';
 
-class Category extends React.Component {
+
+class CategoryItem extends React.Component {
   static propTypes = {
-    ecopoints: ecopointsShape,
+    ecopoint: ecopointShape,
   }
 
   render() {
-    const { ecopoints } = this.props;
+    const { ecopoint } = this.props;
     return (
-      <div className="card border-secondary">
-        <div className="card-body">
-        <h5 className="card-title">{ecopoints.name}</h5>
-        <p className="card-text">{ecopoints.points}</p>
-        <p className="card-text">{ecopoints.category}</p>
-        </div>
-      </div>
+        <li className="listing-item text-center">
+          <span className="col-3">{ecopoint.name}</span>
+          <span className="col-3">{ecopoint.category}</span>
+          <span className="col-3">{ecopoint.points}</span>
+
+        </li>
     );
   }
 }
 
-export default Category;
+export default CategoryItem;

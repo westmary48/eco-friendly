@@ -6,4 +6,4 @@ const ecopointsShape = PropTypes.shape({
   category: PropTypes.string.isRequired,
 });
 
-export default ecopointsShape;
+export default { ecopointsShape };
