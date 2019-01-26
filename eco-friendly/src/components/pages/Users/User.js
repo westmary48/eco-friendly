@@ -3,6 +3,7 @@ import './User.scss';
 import PropTypes from 'prop-types';
 import ecousersRequest from '../../../helpers/data/ecousersRequests';
 import authRequests from '../../../helpers/data/authRequests';
+import ecousersShape from '../../../helpers/propz/ecouserShape';
 
 const defaultUserProfile = {
   userName: '',
@@ -12,6 +13,7 @@ const defaultUserProfile = {
 
 class EcoUser extends React.Component {
   static propTypes = {
+    ecousers: PropTypes.arrayOf(ecousersShape.ecousersShape),
     onSubmit: PropTypes.func,
     isEditing: PropTypes.bool,
     editId: PropTypes.string,
@@ -57,7 +59,7 @@ class EcoUser extends React.Component {
           .then((ecouser) => {
             this.setState({ newUser: ecouser.data });
           })
-          .catch(err => console.error('error with getSingleEcopoint', err));
+          .catch(err => console.error('error with getSingleEcouser', err));
       }
     }
 
@@ -132,6 +134,7 @@ class EcoUser extends React.Component {
               Save Points
             </button>
           </form>
+          </div>
         </div>
     );
   }
