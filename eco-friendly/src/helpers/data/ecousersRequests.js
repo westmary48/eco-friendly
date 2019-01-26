@@ -41,9 +41,18 @@ const getAllUsers = () => new Promise((resolve, reject) => {
     });
 });
 
+const updateUser = (userId, ecouser) => axios.put(`${firebaseUrl}/ecousers/${userId}.json`, ecouser);
+
+const postUser = ecouser => axios.post(`${firebaseUrl}/ecousers.json`, ecouser);
+
+const getSingleUser = userId => axios.get(`${firebaseUrl}/ecousers/${userId}.json`);
+
 
 export default {
   getAllUsers,
   getUserByUid,
   createUser,
+  updateUser,
+  postUser,
+  getSingleUser,
 };
