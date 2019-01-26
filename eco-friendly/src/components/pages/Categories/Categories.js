@@ -1,22 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ecopointsShape from '../../../helpers/propz/ecopointShape';
-import CategoryItem from '../Category/Category';
+import CategoryItem from '../CategoryItem/CategoryItem';
 import './Categories.scss';
 
 class Categories extends React.Component {
   static propTypes = {
-    ecopoints: PropTypes.arrayOf(ecopointsShape),
-    deleteSingleEcopoints: PropTypes.func,
+    ecopoints: PropTypes.arrayOf(ecopointsShape.ecopointsShape),
+    deleteSingleEcopoint: PropTypes.func,
     passPointToEdit: PropTypes.func,
   }
 
   render() {
-    const { ecopoints } = this.props;
+    const {
+      ecopoints,
+      deleteSingleEcopoint,
+      passEcopointToEdit,
+      onEcopointSelection,
+
+    } = this.props;
     const ecopointItemComponents = ecopoints.map(ecopoint => (
       <CategoryItem
         ecopoint={ecopoint}
         key={ecopoint.id}
+        deleteSingleEcopoint={deleteSingleEcopoint}
+        onSelect={onEcopointSelection}
+        passEcopointToEdit={passEcopointToEdit}
       />
     ));
     return (

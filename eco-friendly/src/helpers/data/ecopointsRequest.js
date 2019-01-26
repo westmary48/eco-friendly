@@ -1,9 +1,9 @@
 import axios from 'axios';
 import apiKeys from '../apiKeys';
 
- const firebaseUrl = apiKeys.firebaseConfig.databaseURL;
+const firebaseUrl = apiKeys.firebaseConfig.databaseURL;
 
- const getRequest = () => new Promise((resolve, reject) => {
+const getRequest = () => new Promise((resolve, reject) => {
   axios
     .get(`${firebaseUrl}/ecopoints.json`)
     .then((res) => {
@@ -19,6 +19,18 @@ import apiKeys from '../apiKeys';
     .catch(err => reject(err));
 });
 
- export default {
+const deletePoints = ecopointId => axios.delete(`${firebaseUrl}/ecopoints/${ecopointId}.json`);
+
+const postRequest = ecopoint => axios.post(`${firebaseUrl}/ecopoints.json`, ecopoint);
+
+const getSinglePoint = ecopointId => axios.get(`${firebaseUrl}/ecopoints/${ecopointId}.json`);
+
+const putRequest = (ecopointId, ecopoint) => axios.put(`${firebaseUrl}/ecopoints/${ecopointId}.json`, ecopoint);
+
+export default {
   getRequest,
+  deletePoints,
+  postRequest,
+  getSinglePoint,
+  putRequest,
 };
