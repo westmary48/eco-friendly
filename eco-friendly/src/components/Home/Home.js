@@ -1,107 +1,108 @@
-import React from 'react';
-import './Home.scss';
-import firebase from 'firebase';
-import ecopointsRequest from '../../helpers/data/ecopointsRequest';
+import React, * as react from 'react';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import connection from '../../helpers/data/connections';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Categories from '../pages/Categories/Categories';
+import ecoPointsRequest from '../../helpers/data/ecopointsRequest';
 import AddForm from '../pages/AddForm/AddForm';
 
+class App extends react.Component {
+ state = {
+   authed: false,
+   ecopoints: [],
+   isEditing: false,
+   editId: '-1',
+   selectedEcopointId: -1,
+ }
 
-class Home extends React.Component {
-  state = {
-    ecopoints: [],
-    isEditing: false,
-    editId: '-1',
-  }
+ ecopointSelectEvent = (id) => {
+   this.setState({
+     selectedEcopointId: id,
+   });
+ }
 
-  componentDidMount() {
-    ecopointsRequest.getRequest()
-      .then((ecopoints) => {
-        this.setState({ ecopoints });
-      })
-      .catch(err => console.error('error with ecopoint GET', err));
+ componentDidMount() {
+   connection();
+   ecoPointsRequest.getRequest()
+     .then((ecopoints) => {
+       this.setState({ ecopoints });
+     })
+     .catch(err => console.error('error with ecopoint GET', err));
 
-    this.removeListener = firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        this.setState({
-          authed: true,
-        });
-      } else {
-        this.setState({
-          authed: false,
-        });
-      }
-    });
-  }
+   this.removeListener = firebase.auth().onAuthStateChanged((user) => {
+     if (user) {
+       this.setState({
+         authed: true,
+       });
+     } else {
+       this.setState({
+         authed: false,
+       });
+     }
+   });
+ }
 
-  componentWillUnmount() {
-    this.removeListener();
-  }
-
-  isAuthenticated = () => {
-    this.setState({ authed: true });
-  }
-
-  deleteOne = (ecopointId) => {
-    ecopointsRequest.deletePoints(ecopointId)
-      .then(() => {
-        ecopointsRequest.getRequest()
-          .then((ecopoints) => {
-            this.setState({ ecopoints });
-          });
-      })
-      .catch(err => console.error('error with delete single', err));
-  }
-
- formSubmitEvent = (newEcopoint) => {
-   const { isEditing, editId } = this.state;
-   if (isEditing) {
-     ecopointsRequest.putRequest(editId, newEcopoint)
-       .then(() => {
-         ecopointsRequest.getRequest()
-           .then((ecopoints) => {
-             this.setState({ ecopoints, isEditing: false, editId: '-1' });
-           });
-       })
-       .catch(err => console.error('error with ecopoints post', err));
-   } else {
-     ecopointsRequest.postRequest(newEcopoint)
-       .then(() => {
-         ecopointsRequest.getRequest()
-           .then((ecopoints) => {
-             this.setState({ ecopoints });
-           });
-       })
-       .catch(err => console.error('error with ecopoints post', err));
-   }
+ deleteOne = (ecopointId) => {
+   ecoPointsRequest.deletePoints(ecopointId)
+     .then(() => {
+       ecoPointsRequest.getRequest()
+         .then((ecopoints) => {
+           this.setState({ ecopoints });
+         });
+     })
+     .catch(err => console.error('error with delete single', err));
  }
 
  passEcopointToEdit = ecopointId => this.setState({ isEditing: true, editId: ecopointId });
 
- render() {
-   const {
-     ecopoints,
-     isEditing,
-     editId,
-   } = this.state;
-
-
-   return (
-    <div>
-      <div className="row">
-          <Categories
-          ecopoints={ecopoints}
-          deleteSingleEcopoint={this.deleteOne}
-          passEcopointToEdit={this.passEcopointToEdit}
-          onListingSelection={this.ecopointSelectEvent}
-          />
-        </div>
-        <div className="row">
-          <AddForm onSubmit={this.formSubmitEvent} isEditing={isEditing} editId={editId}/>/>
-        </div>
-        />
-      </div>
-   );
- }
+formSubmitEvent = (newEcopoint) => {
+  const { isEditing, editId } = this.state;
+  if (isEditing) {
+    ecoPointsRequest.putRequest(editId, newEcopoint)
+      .then(() => {
+        ecoPointsRequest.getRequest()
+          .then((ecopoints) => {
+            this.setState({ ecopoints, isEditing: false, editId: '-1' });
+          });
+      })
+      .catch(err => console.error('error with ecopoints post', err));
+  } else {
+    ecoPointsRequest.postRequest(newEcopoint)
+      .then(() => {
+        ecoPointsRequest.getRequest()
+          .then((ecopoints) => {
+            this.setState({ ecopoints });
+          });
+      })
+      .catch(err => console.error('error with ecopoints post', err));
+  }
 }
 
-export default Home;
+render() {
+  const passEcopointToEdit = (ecopointId) => {
+    this.setState({ isEditing: true, editId: ecopointId });
+  };
+  const {
+    ecopoints,
+    isEditing,
+    editId,
+  } = this.state;
+  return (
+    <div className="Home">
+        <Categories
+        ecopoints={ecopoints}
+        deleteSingleEcopoint={this.deleteOne}
+        passEcopointToEdit={this.passEcopointToEdit}
+        onListingSelection={this.ecopointSelectEvent}
+        />
+      ));
+       <div className="row">
+        <AddForm onSubmit={this.formSubmitEvent} isEditing={isEditing} editId={editId}/>
+        </div>
+      </div>
+  );
+}
+}
+
+export default App;
