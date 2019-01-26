@@ -1,43 +1,45 @@
 import React from 'react';
-import './AddForm.scss';
+import PropTypes from 'prop-types';
 import ecopointsRequest from '../../../helpers/data/ecopointsRequest';
-import Home from '../../Home/Home';
 
-class AddTrip extends React.Component {
-  state= {
-    ecopoints: [],
-    authed: false,
-    isEditing: false,
-    editId: '-1',
-  }
+const defaultEcopoint = {
+  name: '',
+  points: 0,
+  category: '',
+  uid: '',
+};
 
-   formSubmitEvent = (newEcopoint) => {
-     ecopointsRequest.postRequest(newEcopoint)
-       .then(() => {
-         ecopointsRequest.getTripData()
-           .then((ecopoints) => {
-             this.setState({ ecopoints });
-           });
-       })
-       .catch(err => console.error(err));
-   }
 
-   render() {
-     const {
-       ecopoints,
-       isEditing,
-       editId,
-     } = this.state;
+class AddForm extends React.Component {
+    static propTypes = {
+      onSubmit: PropTypes.func,
+      isEditing: PropTypes.bool,
+      editId: PropTypes.string,
+    }
 
-     return (
-      <div>
-      <h2>AddForm Component</h2>
-      <div className="row">
-        <Home onSubmit={this.formSubmitEvent} isEditing={isEditing} editId={editId}/>
+    state = {
+      newEcopoint: defaultEcopoint,
+    }
+
+    formSubmitEvent = (newEcopoint) => {
+      ecopointsRequest.postRequest(newEcopoint)
+        .then(() => {
+          ecopointsRequest.getRequest()
+            .then((ecopoints) => {
+              this.setState({ ecopoints });
+            });
+        })
+        .catch(err => console.error(err));
+    }
+
+    render() {
+      const { ecopoints } = this.state;
+      return (
+      <div className="add-form col">
+        <AddForm onSubmit= {this.formSubmitEvent}/>
       </div>
-      </div>
-     );
-   }
+      );
+    }
 }
 
-export default AddTrip;
+export default AddForm;

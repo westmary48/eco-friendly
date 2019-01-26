@@ -1,10 +1,10 @@
 import React from 'react';
-import ecopointShape from '../../../helpers/propz/ecopointShape';
+import ecopointsShape from '../../../helpers/propz/ecopointShape';
 
 
 class CategoryItem extends React.Component {
   static propTypes = {
-    ecopoint: ecopointShape,
+    ecopoint: ecopointsShape.ecopointsShape,
   }
 
   render() {

@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ecopointsShape from '../../../helpers/propz/ecopointShape';
-import CategoryItem from '../Category/Category';
+import CategoryItem from '../CategoryItem/CategoryItem';
 import './Categories.scss';
 
 class Categories extends React.Component {
   static propTypes = {
-    ecopoints: PropTypes.arrayOf(ecopointsShape),
+    ecopoints: PropTypes.arrayOf(ecopointsShape.ecopointsShape),
     deleteSingleEcopoints: PropTypes.func,
     passPointToEdit: PropTypes.func,
   }

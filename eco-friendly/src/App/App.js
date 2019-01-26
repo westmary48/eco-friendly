@@ -6,7 +6,6 @@ import Auth from '../components/Auth/Auth';
 import authRequests from '../helpers/data/authRequests';
 import MyNavbar from '../components/MyNavbar/MyNavbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Category from '../components/pages/Category/Category';
 import Categories from '../components/pages/Categories/Categories';
 import ecoPointsRequest from '../helpers/data/ecopointsRequest';
 import AddForm from '../components/pages/AddForm/AddForm';
@@ -48,15 +47,20 @@ class App extends Component {
  }
 
  render() {
+   const {
+     authed,
+     ecopoints,
+   } = this.state;
+
    const logoutClickEvent = () => {
      authRequests.logoutUser();
      this.setState({ authed: false });
    };
 
-   if (!this.state.authed) {
+   if (!authed) {
      return (
       <div className="App">
-        <MyNavbar isAuthed={this.state.authed} logoutClickEvent={logoutClickEvent} />
+        <MyNavbar isAuthed={authed} logoutClickEvent={logoutClickEvent} />
         <div className="row">
           <Auth isAuthenticated={this.isAuthenticated}/>
         </div>
@@ -65,10 +69,10 @@ class App extends Component {
    }
    return (
     <div className="App">
-      <MyNavbar isAuthed={this.state.authed} logoutClickEvent={logoutClickEvent} />
+      <MyNavbar isAuthed={authed} logoutClickEvent={logoutClickEvent} />
       <div className="row">
-        <Categories ecopoints={this.state.ecopoints}/>
-        <Category />
+        <Categories
+        ecopoints={ecopoints}/>
       </div>
       <div className="row">
         <AddForm />
