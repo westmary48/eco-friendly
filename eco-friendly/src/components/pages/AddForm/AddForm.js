@@ -75,9 +75,9 @@ class AddForm extends React.Component {
         const { isEditing } = this.props;
         const title = () => {
           if (isEditing) {
-            return <h2>Add New ecopoint:</h2>;
+            return <h2>Add New Ecopoint:</h2>;
           }
-          return <h2>Add New ecopoint:</h2>;
+          return <h2>Add New Ecopoint:</h2>;
         };
         return (
               <div className="ecopointForm col">
