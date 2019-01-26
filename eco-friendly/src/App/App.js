@@ -14,8 +14,16 @@ class App extends Component {
  state = {
    authed: false,
    ecopoints: [],
+   isEditing: false,
+   editId: '-1',
+   selectedEcopointId: -1,
  }
 
+ ecopointSelectEvent = (id) => {
+   this.setState({
+     selectedEcopointId: id,
+   });
+ }
 
  componentDidMount() {
    connection();
@@ -46,40 +54,82 @@ class App extends Component {
    this.setState({ authed: true });
  }
 
- render() {
-   const {
-     authed,
-     ecopoints,
-   } = this.state;
+ deleteOne = (ecopointId) => {
+   ecoPointsRequest.deletePoints(ecopointId)
+     .then(() => {
+       ecoPointsRequest.getRequest()
+         .then((ecopoints) => {
+           this.setState({ ecopoints });
+         });
+     })
+     .catch(err => console.error('error with delete single', err));
+ }
 
-   const logoutClickEvent = () => {
-     authRequests.logoutUser();
-     this.setState({ authed: false });
-   };
+formSubmitEvent = (newEcopoint) => {
+  const { isEditing, editId } = this.state;
+  if (isEditing) {
+    ecoPointsRequest.putRequest(editId, newEcopoint)
+      .then(() => {
+        ecoPointsRequest.getRequest()
+          .then((ecopoints) => {
+            this.setState({ ecopoints, isEditing: false, editId: '-1' });
+          });
+      })
+      .catch(err => console.error('error with ecopoints post', err));
+  } else {
+    ecoPointsRequest.postRequest(newEcopoint)
+      .then(() => {
+        ecoPointsRequest.getRequest()
+          .then((ecopoints) => {
+            this.setState({ ecopoints });
+          });
+      })
+      .catch(err => console.error('error with ecopoints post', err));
+  }
+}
 
-   if (!authed) {
-     return (
+passEcopointToEdit = ecopointId => this.setState({ isEditing: true, editId: ecopointId });
+
+render() {
+  const {
+    authed,
+    ecopoints,
+    isEditing,
+    editId,
+  } = this.state;
+
+  const logoutClickEvent = () => {
+    authRequests.logoutUser();
+    this.setState({ authed: false });
+  };
+
+  if (!authed) {
+    return (
       <div className="App">
         <MyNavbar isAuthed={authed} logoutClickEvent={logoutClickEvent} />
         <div className="row">
           <Auth isAuthenticated={this.isAuthenticated}/>
         </div>
       </div>
-     );
-   }
-   return (
+    );
+  }
+  return (
     <div className="App">
       <MyNavbar isAuthed={authed} logoutClickEvent={logoutClickEvent} />
       <div className="row">
         <Categories
-        ecopoints={ecopoints}/>
+        ecopoints={ecopoints}
+        deleteSingleEcopoint={this.deleteOne}
+        passEcopointToEdit={this.passEcopointToEdit}
+        onListingSelection={this.ecopointSelectEvent}
+        />
       </div>
       <div className="row">
-        <AddForm />
+        <AddForm onSubmit={this.formSubmitEvent} isEditing={isEditing} editId={editId}/>/>
       </div>
     </div>
-   );
- }
+  );
+}
 }
 
 export default App;
