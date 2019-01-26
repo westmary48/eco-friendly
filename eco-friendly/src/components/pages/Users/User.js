@@ -12,6 +12,7 @@ const defaultUserProfile = {
 
 class EcoUser extends React.Component {
   static propTypes = {
+    ecopoints: PropTypes.arrayOf(ecousersShape.ecousersShape),
     onSubmit: PropTypes.func,
     isEditing: PropTypes.bool,
     editId: PropTypes.string,
@@ -138,3 +139,4 @@ class EcoUser extends React.Component {
   }
 
 export default EcoUser;
+
