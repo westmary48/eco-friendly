@@ -1,15 +1,23 @@
 import React from 'react';
-import './Category.scss';
+import ecopointShape from '../../../helpers/propz/ecopointShape';
 
 
-class Category extends React.Component {
+class CategoryItem extends React.Component {
+  static propTypes = {
+    ecopoint: ecopointShape,
+  }
+
   render() {
+    const { ecopoint } = this.props;
     return (
-      <div className="Category">
-        Category Page
-      </div>
+        <li className="listing-item text-center">
+          <span className="col-3">{ecopoint.name}</span>
+          <span className="col-3">{ecopoint.category}</span>
+          <span className="col-3">{ecopoint.points}</span>
+
+        </li>
     );
   }
 }
 
-export default Category;
+export default CategoryItem;
