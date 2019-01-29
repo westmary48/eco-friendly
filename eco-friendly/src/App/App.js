@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Categories from '../components/pages/Categories/Categories';
 import ecoPointsRequest from '../helpers/data/ecopointsRequest';
 import AddForm from '../components/pages/AddForm/AddForm';
+import EcoUser from '../components/pages/Users/User';
 
 class App extends Component {
  state = {
@@ -127,6 +128,9 @@ render() {
       <div className="row">
         <AddForm onSubmit={this.formSubmitEvent} isEditing={isEditing} editId={editId}/>/>
       </div>
+    <div className="row">
+    <EcoUser onSubmit={this.formSubmitEvent} isEditing={isEditing} editId={editId}/>
+    </div>
     </div>
   );
 }

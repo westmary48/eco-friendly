@@ -39,7 +39,7 @@ class EcoUser extends React.Component {
       this.setState({ newUser: tempEcouser });
     }
 
-    userNameChange = e => this.formFieldStringState('name', e);
+    userNameChange = e => this.formFieldStringState('userName', e);
 
     pointsUserChange = e => this.formFieldNumberState('points', e);
 
