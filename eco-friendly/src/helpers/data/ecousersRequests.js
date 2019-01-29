@@ -5,7 +5,8 @@ const firebaseUrl = apiKeys.firebaseConfig.databaseURL;
 
 const createUser = user => axios.post(`${firebaseUrl}/ecousers.json`, user);
 
-const getUserByUid = uid => new Promise((resolve, reject) => {
+// change all users to ecousers
+const getEcoUserByUid = uid => new Promise((resolve, reject) => {
   axios.get(`${firebaseUrl}/ecousers.json?orderBy="uid"&equalTo="${uid}"`)
     .then((result) => {
       const userObject = result.data;
@@ -23,36 +24,18 @@ const getUserByUid = uid => new Promise((resolve, reject) => {
     });
 });
 
-const getAllUsers = () => new Promise((resolve, reject) => {
-  axios.get(`${firebaseUrl}/ecousers.json`)
-    .then((result) => {
-      const userObject = result.data;
-      const userArray = [];
-      if (userObject != null) {
-        Object.keys(userObject).forEach((userId) => {
-          userObject[userId].id = userId;
-          userArray.push(userObject[userId]);
-        });
-      }
-      resolve(userArray);
-    })
-    .catch((error) => {
-      reject(error);
-    });
-});
 
-const updateUser = (userId, ecouser) => axios.put(`${firebaseUrl}/ecousers/${userId}.json`, ecouser);
+const updateEcoUser = (ecouserId, ecouser) => axios.put(`${firebaseUrl}/ecousers/${ecouserId}.json`, ecouser);
 
-const postUser = ecouser => axios.post(`${firebaseUrl}/ecousers.json`, ecouser);
+const postEcoUser = ecouser => axios.post(`${firebaseUrl}/ecousers.json`, ecouser);
 
-const getSingleUser = userId => axios.get(`${firebaseUrl}/ecousers/${userId}.json`);
+const getSingleEcoUser = ecouserId => axios.get(`${firebaseUrl}/ecousers/${ecouserId}.json`);
 
 
 export default {
-  getAllUsers,
-  getUserByUid,
+  getEcoUserByUid,
   createUser,
-  updateUser,
-  postUser,
-  getSingleUser,
+  updateEcoUser,
+  postEcoUser,
+  getSingleEcoUser,
 };

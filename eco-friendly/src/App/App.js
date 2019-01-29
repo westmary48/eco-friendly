@@ -10,10 +10,15 @@ import Categories from '../components/pages/Categories/Categories';
 import ecoPointsRequest from '../helpers/data/ecopointsRequest';
 import AddForm from '../components/pages/AddForm/AddForm';
 import EcoUser from '../components/pages/Users/User';
+import ecousersRequest from '../helpers/data/ecousersRequests';
 
 class App extends Component {
  state = {
    authed: false,
+   ecouser: {
+     userName: '',
+     points: 0,
+   },
    ecopoints: [],
    isEditing: false,
    editId: '-1',
@@ -26,19 +31,37 @@ class App extends Component {
    });
  }
 
- componentDidMount() {
-   connection();
-   ecoPointsRequest.getRequest()
+ getEcouser = () => {
+   const currentUid = authRequests.getCurrentUid();
+   ecousersRequest.getEcoUserByUid(currentUid)
+     .then((ecouser) => {
+       this.setState({ ecouser });
+     })
+     .catch((error) => {
+       console.error('error on users', error);
+     });
+ }
+
+ getEcoPoints = () => {
+   const currentUid = authRequests.getCurrentUid();
+   ecoPointsRequest.getRequest(currentUid)
      .then((ecopoints) => {
        this.setState({ ecopoints });
      })
      .catch(err => console.error('error with ecopoint GET', err));
+ }
+
+ // Add UID
+ componentDidMount() {
+   connection();
 
    this.removeListener = firebase.auth().onAuthStateChanged((user) => {
      if (user) {
        this.setState({
          authed: true,
        });
+       this.getEcoPoints();
+       this.getEcouser();
      } else {
        this.setState({
          authed: false,
@@ -129,7 +152,9 @@ render() {
         <AddForm onSubmit={this.formSubmitEvent} isEditing={isEditing} editId={editId}/>/>
       </div>
     <div className="row">
-    <EcoUser onSubmit={this.formSubmitEvent} isEditing={isEditing} editId={editId}/>
+    <EcoUser
+    ecouser={this.state.ecouser}
+    />
     </div>
     </div>
   );
