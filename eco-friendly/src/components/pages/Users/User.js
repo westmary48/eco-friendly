@@ -3,6 +3,7 @@ import './User.scss';
 import PropTypes from 'prop-types';
 import ecousersRequest from '../../../helpers/data/ecousersRequests';
 import authRequests from '../../../helpers/data/authRequests';
+import ecousersShape from '../../../helpers/propz/ecouserShape';
 
 const defaultUserProfile = {
   userName: '',
@@ -118,6 +119,7 @@ class EcoUser extends React.Component {
                 value={newUser.userName}
                 onChange={this.userNameChange}
               />
+              </div>
             <div className="form-group">
               <label htmlFor="userPoints">user points</label>
               <input
@@ -136,7 +138,6 @@ class EcoUser extends React.Component {
         </div>
     );
   }
-  }
+}
 
 export default EcoUser;
-
