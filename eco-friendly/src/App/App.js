@@ -103,6 +103,11 @@ formSubmitEvent = (newEcopoint) => {
   } else {
     ecoPointsRequest.postRequest(newEcopoint)
       .then(() => {
+        ecousersRequest.updateEcoUser(this.state.ecouser.id, { points: 1000 })
+          .then(() => {
+            this.getEcouser();
+          })
+          .catch(err => console.error('error with ecopoints post', err));
         ecoPointsRequest.getRequest()
           .then((ecopoints) => {
             this.setState({ ecopoints });

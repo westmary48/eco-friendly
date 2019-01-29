@@ -25,7 +25,7 @@ const getEcoUserByUid = uid => new Promise((resolve, reject) => {
 });
 
 
-const updateEcoUser = (ecouserId, ecouser) => axios.put(`${firebaseUrl}/ecousers/${ecouserId}.json`, ecouser);
+const updateEcoUser = (ecouserId, ecouserPoints) => axios.patch(`${firebaseUrl}/ecousers/${ecouserId}.json`, ecouserPoints);
 
 const postEcoUser = ecouser => axios.post(`${firebaseUrl}/ecousers.json`, ecouser);
 
