@@ -31,6 +31,8 @@ const postEcoUser = ecouser => axios.post(`${firebaseUrl}/ecousers.json`, ecouse
 
 const getSingleEcoUser = ecouserId => axios.get(`${firebaseUrl}/ecousers/${ecouserId}.json`);
 
+const addUser = newUser => axios.post(`${firebaseUrl}/ecousers.json`, newUser);
+
 
 export default {
   getEcoUserByUid,
@@ -38,4 +40,5 @@ export default {
   updateEcoUser,
   postEcoUser,
   getSingleEcoUser,
+  addUser,
 };

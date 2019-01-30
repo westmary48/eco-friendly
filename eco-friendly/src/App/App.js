@@ -104,7 +104,6 @@ formSubmitEvent = (newEcopoint) => {
     ecoPointsRequest.postRequest(newEcopoint)
       .then(() => {
         const pointTotal = newEcopoint.points + this.state.ecouser.points;
-        // todo how many points do we need to increase points by sum of points that they already have plus what they just
         ecousersRequest.updateEcoUser(this.state.ecouser.id, { points: pointTotal })
           .then(() => {
             this.getEcouser();
