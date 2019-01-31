@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Auth.scss';
 import authRequests from '../../helpers/data/authRequests';
+import ecousersRequest from '../../helpers/data/ecousersRequests';
 
 import googleButton from '../images/googlebutton.png';
 
@@ -14,13 +15,30 @@ class Auth extends React.Component {
 
   authenticateUser = (e) => {
     e.preventDefault();
-    authRequests
-      .authenticate()
-      .then(() => {
-        this.props.isAuthenticated();
-      })
-      .catch(err => console.error('there was an error with auth', err));
-  };
+    authRequests.authenticate().then((results) => {
+      ecousersRequest.getEcoUserByUid(results.ecouser.uid)
+        .then((ecouserObject) => {
+          if (!ecouserObject) {
+            const newUserObject = {
+              userName: `${results.ecouser.userName}`,
+              points: `${results.ecouser.points}`,
+              uid: `${results.ecouser.uid}`,
+            };
+            ecousersRequest.createUser(newUserObject);
+          }
+        });
+    }).catch(err => console.error('there was an error with auth', err));
+  }
+
+  // authenticateUser = (e) => {
+  //   e.preventDefault();
+  //   authRequests
+  //     .authenticate()
+  //     .then(() => {
+  //       this.props.isAuthenticated();
+  //     })
+  //     .catch(err => console.error('there was an error with auth', err));
+  // };
 
   render() {
     return (
