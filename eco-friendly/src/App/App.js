@@ -51,7 +51,6 @@ class App extends Component {
      .catch(err => console.error('error with ecopoint GET', err));
  }
 
- // Add UID
  componentDidMount() {
    connection();
 

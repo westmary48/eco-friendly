@@ -9,15 +9,15 @@ const createUser = user => axios.post(`${firebaseUrl}/ecousers.json`, user);
 const getEcoUserByUid = uid => new Promise((resolve, reject) => {
   axios.get(`${firebaseUrl}/ecousers.json?orderBy="uid"&equalTo="${uid}"`)
     .then((result) => {
-      const userObject = result.data;
-      const userArray = [];
-      if (userObject != null) {
-        Object.keys(userObject).forEach((userId) => {
-          userObject[userId].id = userId;
-          userArray.push(userObject[userId]);
+      const ecouserObject = result.data;
+      const ecouserArray = [];
+      if (ecouserObject != null) {
+        Object.keys(ecouserObject).forEach((ecouserId) => {
+          ecouserObject[ecouserId].id = ecouserId;
+          ecouserArray.push(ecouserObject[ecouserId]);
         });
       }
-      resolve(userArray[0]);
+      resolve(ecouserArray[0]);
     })
     .catch((error) => {
       reject(error);

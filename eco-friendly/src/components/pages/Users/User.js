@@ -11,6 +11,7 @@ class EcoUser extends React.Component {
   render() {
     return (
         <div className = "userPoints">
+        <h1>{this.props.ecouser.email}</h1>
         <h1>{this.props.ecouser.userName}</h1>
         <h1>{this.props.ecouser.points}</h1>
 
