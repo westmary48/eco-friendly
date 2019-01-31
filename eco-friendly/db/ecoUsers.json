@@ -6,7 +6,7 @@
     },
     "user2": {
       "userName": "Thomas Jefferson",
-      "points": "10",
+      "points": 10,
       "uid": "67890"
     }
 }

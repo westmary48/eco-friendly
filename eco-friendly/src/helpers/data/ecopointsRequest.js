@@ -2,7 +2,7 @@ import axios from 'axios';
 import apiKeys from '../apiKeys';
 
 const firebaseUrl = apiKeys.firebaseConfig.databaseURL;
-
+// UID
 const getRequest = () => new Promise((resolve, reject) => {
   axios
     .get(`${firebaseUrl}/ecopoints.json`)

@@ -9,10 +9,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Categories from '../components/pages/Categories/Categories';
 import ecoPointsRequest from '../helpers/data/ecopointsRequest';
 import AddForm from '../components/pages/AddForm/AddForm';
+import EcoUser from '../components/pages/Users/User';
+import ecousersRequest from '../helpers/data/ecousersRequests';
 
 class App extends Component {
  state = {
    authed: false,
+   ecouser: {
+     userName: '',
+     points: 0,
+   },
    ecopoints: [],
    isEditing: false,
    editId: '-1',
@@ -25,19 +31,36 @@ class App extends Component {
    });
  }
 
- componentDidMount() {
-   connection();
-   ecoPointsRequest.getRequest()
+ getEcouser = () => {
+   const currentUid = authRequests.getCurrentUid();
+   ecousersRequest.getEcoUserByUid(currentUid)
+     .then((ecouser) => {
+       this.setState({ ecouser });
+     })
+     .catch((error) => {
+       console.error('error on users', error);
+     });
+ }
+
+ getEcoPoints = () => {
+   const currentUid = authRequests.getCurrentUid();
+   ecoPointsRequest.getRequest(currentUid)
      .then((ecopoints) => {
        this.setState({ ecopoints });
      })
      .catch(err => console.error('error with ecopoint GET', err));
+ }
+
+ componentDidMount() {
+   connection();
 
    this.removeListener = firebase.auth().onAuthStateChanged((user) => {
      if (user) {
        this.setState({
          authed: true,
        });
+       this.getEcoPoints();
+       this.getEcouser();
      } else {
        this.setState({
          authed: false,
@@ -79,6 +102,12 @@ formSubmitEvent = (newEcopoint) => {
   } else {
     ecoPointsRequest.postRequest(newEcopoint)
       .then(() => {
+        const pointTotal = newEcopoint.points + this.state.ecouser.points;
+        ecousersRequest.updateEcoUser(this.state.ecouser.id, { points: pointTotal })
+          .then(() => {
+            this.getEcouser();
+          })
+          .catch(err => console.error('error with ecopoints post', err));
         ecoPointsRequest.getRequest()
           .then((ecopoints) => {
             this.setState({ ecopoints });
@@ -127,6 +156,11 @@ render() {
       <div className="row">
         <AddForm onSubmit={this.formSubmitEvent} isEditing={isEditing} editId={editId}/>/>
       </div>
+    <div className="row">
+    <EcoUser
+    ecouser={this.state.ecouser}
+    />
+    </div>
     </div>
   );
 }
