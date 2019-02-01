@@ -16,13 +16,13 @@ class Auth extends React.Component {
   authenticateUser = (e) => {
     e.preventDefault();
     authRequests.authenticate().then((results) => {
-      ecousersRequest.getEcoUserByUid(results.ecouser.uid)
+      ecousersRequest.getEcoUserByUid(results.user.uid)
         .then((ecouserObject) => {
           if (!ecouserObject) {
             const newUserObject = {
-              userName: `${results.ecouser.userName}`,
-              points: `${results.ecouser.points}`,
-              uid: `${results.ecouser.uid}`,
+              userName: `${results.user.displayName}`,
+              points: 0,
+              uid: `${results.user.uid}`,
             };
             ecousersRequest.createUser(newUserObject);
           }
