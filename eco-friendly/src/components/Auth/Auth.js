@@ -1,6 +1,6 @@
 import React from 'react';
 
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import './Auth.scss';
 import authRequests from '../../helpers/data/authRequests';
 import ecousersRequest from '../../helpers/data/ecousersRequests';
@@ -9,9 +9,9 @@ import googleButton from '../images/googlebutton.png';
 
 
 class Auth extends React.Component {
-  static propTypes = {
-    isAuthenticated: PropTypes.func,
-  };
+  // static propTypes = {
+  //   isAuthenticated: PropTypes.func,
+  // };
 
   authenticateUser = (e) => {
     e.preventDefault();

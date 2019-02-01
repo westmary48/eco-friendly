@@ -137,7 +137,9 @@ render() {
       <div className="App">
         <MyNavbar isAuthed={authed} logoutClickEvent={logoutClickEvent} />
         <div className="row">
-          <Auth isAuthenticated={this.isAuthenticated}/>
+          <Auth
+          isAuthenticated={this.authenticateUser}
+          />
         </div>
       </div>
     );
