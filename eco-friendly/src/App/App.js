@@ -23,6 +23,13 @@ class App extends Component {
    isEditing: false,
    editId: '-1',
    selectedEcopointId: -1,
+   ecouserCreated: false,
+ }
+
+ ecouserCreated = () => {
+   this.setState({
+     ecouserCreated: true,
+   });
  }
 
  ecopointSelectEvent = (id) => {
@@ -59,8 +66,6 @@ class App extends Component {
        this.setState({
          authed: true,
        });
-       this.getEcoPoints();
-       this.getEcouser();
      } else {
        this.setState({
          authed: false,
@@ -71,6 +76,13 @@ class App extends Component {
 
  componentWillUnmount() {
    this.removeListener();
+ }
+
+ componentDidUpdate(prevProps, prevState) {
+   if (!prevState.ecouserCreated && this.state.ecouserCreated && this.state.authed) {
+     this.getEcoPoints();
+     this.getEcouser();
+   }
  }
 
  isAuthenticated = () => {
@@ -139,6 +151,7 @@ render() {
         <div className="row">
           <Auth
           isAuthenticated={this.authenticateUser}
+          ecouserCreated= {this.ecouserCreated}
           />
         </div>
       </div>

@@ -24,7 +24,11 @@ class Auth extends React.Component {
               points: 0,
               uid: `${results.user.uid}`,
             };
-            ecousersRequest.createUser(newUserObject);
+            ecousersRequest.createUser(newUserObject).then(() => {
+              this.props.ecouserCreated();
+            });
+          } else {
+            this.props.ecouserCreated();
           }
         });
     }).catch(err => console.error('there was an error with auth', err));
