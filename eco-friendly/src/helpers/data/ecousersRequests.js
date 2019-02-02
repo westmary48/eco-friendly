@@ -24,6 +24,24 @@ const getEcoUserByUid = uid => new Promise((resolve, reject) => {
     });
 });
 
+const getAllUsers = () => new Promise((resolve, reject) => {
+  axios.get(`${firebaseUrl}/users.json`)
+    .then((result) => {
+      const userObject = result.data;
+      const userArray = [];
+      if (userObject != null) {
+        Object.keys(userObject).forEach((userId) => {
+          userObject[userId].id = userId;
+          userArray.push(userObject[userId]);
+        });
+      }
+      resolve(userArray);
+    })
+    .catch((error) => {
+      reject(error);
+    });
+});
+
 
 const updateEcoUser = (ecouserId, ecouserPoints) => axios.patch(`${firebaseUrl}/ecousers/${ecouserId}.json`, ecouserPoints);
 
@@ -41,4 +59,5 @@ export default {
   postEcoUser,
   getSingleEcoUser,
   addUser,
+  getAllUsers,
 };

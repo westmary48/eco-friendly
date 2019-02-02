@@ -11,6 +11,8 @@ import ecoPointsRequest from '../helpers/data/ecopointsRequest';
 import AddForm from '../components/pages/AddForm/AddForm';
 import EcoUser from '../components/pages/Users/User';
 import ecousersRequest from '../helpers/data/ecousersRequests';
+import Friends from '../components/Friends/Friends';
+import smashRequests from '../helpers/data/smashRequests';
 
 class App extends Component {
  state = {
@@ -18,6 +20,9 @@ class App extends Component {
    ecouser: {
      userName: '',
      points: 0,
+     undiscoveredFriends: [],
+     pendingFriendships: [],
+     myFriends: [],
    },
    ecopoints: [],
    isEditing: false,
@@ -25,6 +30,7 @@ class App extends Component {
    selectedEcopointId: -1,
    ecouserCreated: false,
  }
+
 
  ecouserCreated = () => {
    this.setState({
@@ -51,9 +57,10 @@ class App extends Component {
 
  getEcoPoints = () => {
    const currentUid = authRequests.getCurrentUid();
+   smashRequests.getPointsFromMeAndFriends(currentUid);
    ecoPointsRequest.getRequest(currentUid)
-     .then((ecopoints) => {
-       this.setState({ ecopoints });
+     .then((ecopoints, myFriends) => {
+       this.setState({ ecopoints, myFriends });
      })
      .catch(err => console.error('error with ecopoint GET', err));
  }
@@ -65,10 +72,12 @@ class App extends Component {
      if (user) {
        this.setState({
          authed: true,
+         pending: false,
        });
      } else {
        this.setState({
          authed: false,
+         pending: false,
        });
      }
    });
@@ -169,13 +178,22 @@ render() {
         />
       </div>
       <div className="row">
-        <AddForm onSubmit={this.formSubmitEvent} isEditing={isEditing} editId={editId}/>/>
-      </div>
-    <div className="row">
+        <AddForm onSubmit={this.formSubmitEvent} isEditing={isEditing} editId={editId}/>
+</div>
+<div className="row">
     <EcoUser
     ecouser={this.state.ecouser}
     />
     </div>
+<div className="row">
+ <Friends
+ pendingFriendshipsCards= {this.pendingFriendshipsCards}
+ myFriendsCards = {this.myFriendsCards}
+ myFriends = {this.myFriends}
+ friendshipOver = {this.friendshipOver}
+ confirmFriendship = {this.confirmFriendship}
+ />
+ </div>
     </div>
   );
 }

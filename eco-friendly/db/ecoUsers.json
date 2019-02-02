@@ -2,12 +2,116 @@
     "user1": {
       "userName": "Mary West",
       "points": 10,
-      "uid": "SH0sx3keYmP10K09vHGRrktCj4J3"
+      "uid": "SH0sx3keYmP10K09vHGRrktCj4J3",
+      "photo": "https://www.randomlists.com/img/people/barbra_streisand.jpg"
     },
     "user2": {
+      "userName": "Robert Rice",
+      "points": 10,
+      "uid": "67890",
+      "photo":"https://lh3.googleusercontent.com/-O9k8riMfPkk/AAAAAAAAAAI/AAAAAAAAAOY/ag14Ya6y9Fw/photo.jpg"
+    },
+    "user3": {
       "userName": "Thomas Jefferson",
       "points": 10,
+      "photo": "https://www.randomlists.com/img/people/thomas_jefferson.jpg",
       "uid": "67890"
+    },
+    "user4": {
+      "userName": "Miley Cyrus",
+      "points": 10,
+      "photo": "https://www.randomlists.com/img/people/miley_cyrus.jpg",
+      "uid": "12345"
+    },
+    "user5": {
+      "userName": "Harriet Tubman",
+      "points": 10,
+      "photo": "https://www.randomlists.com/img/people/harriet_tubman.jpg",
+      "uid": "11111"
+    },
+    "user6": {
+      "userName": "Clint Eastwood",
+      "points": 10,
+      "photo": "https://www.randomlists.com/img/people/clint_eastwood.jpg",
+      "uid": "22222"
+    },
+    "user7": {
+      "userName": "Eminem",
+      "points": 10,
+      "photo": "https://www.randomlists.com/img/people/eminem.jpg",
+      "uid": "33333"
+    },
+    "user8": {
+      "userName": "William Shatner",
+      "points": 10,
+      "photo": "https://www.randomlists.com/img/people/william_shatner.jpg",
+      "uid": "44444"
+    },
+    "user9": {
+      "userName": "Barbra Streisand",
+      "points": 10,
+      "photo": "https://www.randomlists.com/img/people/barbra_streisand.jpg",
+      "uid": "55555"
+    },
+    "user10": {
+      "userName": "Bob Marley",
+      "points": 10,
+      "photo": "https://www.randomlists.com/img/people/bob_marley.jpg",
+      "uid": "66666"
+    },
+    "user11": {
+      "userName": "Taylor Swift",
+      "points": 10,
+      "photo": "https://www.randomlists.com/img/people/taylor_swift.jpg",
+      "uid": "77777"
+    },
+    "user12": {
+      "userName": "George Washington",
+      "points": 10,
+      "photo": "https://www.randomlists.com/img/people/george_washington.jpg",
+      "uid": "88888"
+    },
+    "user13": {
+      "userName": "Ryan Reynolds",
+      "points": 10,
+      "photo": "https://www.randomlists.com/img/people/ryan_reynolds.jpg",
+      "uid": "99999"
+    },
+    "user14": {
+      "userName": "Britney Spears",
+      "points": 10,
+      "photo": "https://www.randomlists.com/img/people/britney_spears.jpg",
+      "uid": "0000000"
+    },
+    "user15": {
+      "userName": "Serena Williams",
+      "points": 10,
+      "photo": "https://www.randomlists.com/img/people/serena_williams.jpg",
+      "uid": "12121212"
+    },
+    "user16": {
+      "userName": "Napoleon",
+      "points": 10,
+      "photo": "https://www.randomlists.com/img/people/napoleon_bonaparte.jpg",
+      "uid": "1313131313"
+    },
+    "user17": {
+      "userName": "Leonardo da Vinci",
+      "points": 10,
+      "photo": "https://www.randomlists.com/img/people/leonardo_da_vinci.jpg",
+      "uid": "1414141414"
+    },
+    "user18": {
+      "userName": "Meryl Streep",
+      "points": 10,
+      "photo": "https://www.randomlists.com/img/people/meryl_streep.jpg",
+      "uid": "1515151515"
+    },
+    "user19": {
+      "userName": "Darth Vader",
+      "points": 10,
+      "photo": "https://www.randomlists.com/img/people/james_earl_jones.jpg",
+      "uid": "16161616"
     }
-}
+  }
 
