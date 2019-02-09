@@ -9,10 +9,6 @@ import googleButton from '../images/googlebutton.png';
 
 
 class Auth extends React.Component {
-  // static propTypes = {
-  //   isAuthenticated: PropTypes.func,
-  // };
-
   authenticateUser = (e) => {
     e.preventDefault();
     authRequests.authenticate().then((results) => {
@@ -34,16 +30,6 @@ class Auth extends React.Component {
     }).catch(err => console.error('there was an error with auth', err));
   }
 
-  // authenticateUser = (e) => {
-  //   e.preventDefault();
-  //   authRequests
-  //     .authenticate()
-  //     .then(() => {
-  //       this.props.isAuthenticated();
-  //     })
-  //     .catch(err => console.error('there was an error with auth', err));
-  // };
-
   render() {
     return (
       <div className="Auth">
@@ -56,28 +42,3 @@ class Auth extends React.Component {
 }
 
 export default Auth;
-
-//   static propTypes = {
-//     isAuthenticated: PropTypes.func,
-//   };
-
-//   authenticateUser = (e) => {
-//     e.preventDefault();
-//     authRequests
-//       .authenticate()
-//       .then(() => {
-//         this.props.isAuthenticated();
-//       })
-//       .catch(err => console.error('there was an error with auth', err));
-//   };
-
-//   render() {
-//     return (
-//       <div className="Auth">
-//         <button className="btn btn-danger" onClick={this.authenticateUser}>
-//           <img src={googleButton} alt="google login button" />
-//         </button>
-//       </div>
-//     );
-//   }
-// }

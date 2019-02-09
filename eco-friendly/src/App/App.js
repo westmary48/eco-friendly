@@ -11,6 +11,8 @@ import ecoPointsRequest from '../helpers/data/ecopointsRequest';
 import AddForm from '../components/pages/AddForm/AddForm';
 import EcoUser from '../components/pages/Users/User';
 import ecousersRequest from '../helpers/data/ecousersRequests';
+import Friends from '../components/Friends/Friends';
+import smashRequests from '../helpers/data/smashRequests';
 
 class App extends Component {
  state = {
@@ -18,6 +20,8 @@ class App extends Component {
    ecouser: {
      userName: '',
      points: 0,
+     undiscoveredFriends: [],
+     pendingFriendships: [],
    },
    ecopoints: [],
    isEditing: false,
@@ -25,6 +29,7 @@ class App extends Component {
    selectedEcopointId: -1,
    ecouserCreated: false,
  }
+
 
  ecouserCreated = () => {
    this.setState({
@@ -51,9 +56,10 @@ class App extends Component {
 
  getEcoPoints = () => {
    const currentUid = authRequests.getCurrentUid();
+   smashRequests.getPointsFromMeAndFriends(currentUid);
    ecoPointsRequest.getRequest(currentUid)
-     .then((ecopoints) => {
-       this.setState({ ecopoints });
+     .then((ecopoints, myFriends) => {
+       this.setState({ ecopoints, myFriends });
      })
      .catch(err => console.error('error with ecopoint GET', err));
  }
@@ -65,10 +71,12 @@ class App extends Component {
      if (user) {
        this.setState({
          authed: true,
+         pending: false,
        });
      } else {
        this.setState({
          authed: false,
+         pending: false,
        });
      }
    });
@@ -98,6 +106,19 @@ class App extends Component {
          });
      })
      .catch(err => console.error('error with delete single', err));
+ }
+
+ ecoAlerts = () => {
+   const ecoUserAlerts = [];
+   ecoUserAlerts[0] = 'Recycling one aluminum can save enough energy to run a TV for three hours.';
+   ecoUserAlerts[1] = 'Around 25,000 trees are cut down each day just to produce toilet paper.';
+   ecoUserAlerts[2] = 'Approximately five million tons of oil produced in the world each year ends up in the ocean.';
+   ecoUserAlerts[3] = ' Seventy-eight percent of marine mammals are threatened by accidental deaths, such as getting caught in fishing nets.';
+   ecoUserAlerts[4] = 'A glass bottle can take 4,000 years to decompose.';
+   ecoUserAlerts[5] = 'Rainforests are being cut down at a rate of 100 acres per minute.';
+   ecoUserAlerts[6] = 'he United States is the No. 1 trash-producing country in the world.';
+   ecoUserAlerts[7] = '8. Ford Motor Company has said that 75 percent of every vehicle is recyclable.';
+   ecoUserAlerts[8] = 'If the entire world lived like the average American, we’d need five planets to provide enough resources.';
  }
 
 formSubmitEvent = (newEcopoint) => {
@@ -166,16 +187,22 @@ render() {
         deleteSingleEcopoint={this.deleteOne}
         passEcopointToEdit={this.passEcopointToEdit}
         onListingSelection={this.ecopointSelectEvent}
+        ecoAlerts= {this.ecoAlerts}
         />
       </div>
       <div className="row">
-        <AddForm onSubmit={this.formSubmitEvent} isEditing={isEditing} editId={editId}/>/>
-      </div>
-    <div className="row">
+        <AddForm onSubmit={this.formSubmitEvent} isEditing={isEditing} editId={editId}/>
+</div>
+<div className="row">
     <EcoUser
     ecouser={this.state.ecouser}
     />
     </div>
+<div className="row">
+ <Friends
+ friends= {this.state.authed}
+ />
+ </div>
     </div>
   );
 }

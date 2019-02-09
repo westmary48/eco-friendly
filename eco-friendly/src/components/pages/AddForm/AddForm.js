@@ -60,16 +60,6 @@ class AddForm extends React.Component {
         }
       }
 
-      // formSubmitEvent = (newEcopoint) => {
-      //   ecopointsRequest.postRequest(newEcopoint)
-      //     .then(() => {
-      //       ecopointsRequest.getRequest()
-      //         .then((ecopoints) => {
-      //           this.setState({ ecopoints });
-      //         });
-      //     })
-      //     .catch(err => console.error(err));
-      // }
       render() {
         const { newEcopoint } = this.state;
         const { isEditing } = this.props;
