@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 import smashRequests from '../../helpers/data/smashRequests';
@@ -133,11 +132,11 @@ class Friends extends React.Component {
             <h3>My Friends</h3>
             <hr/>
             { myFriendsCards }
-            {console.log(myFriends)}
           </div>
         </div>
       </div>
     );
   }
 }
+
 export default Friends;

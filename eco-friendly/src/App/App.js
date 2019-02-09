@@ -22,7 +22,6 @@ class App extends Component {
      points: 0,
      undiscoveredFriends: [],
      pendingFriendships: [],
-     myFriends: [],
    },
    ecopoints: [],
    isEditing: false,
@@ -109,6 +108,19 @@ class App extends Component {
      .catch(err => console.error('error with delete single', err));
  }
 
+ ecoAlerts = () => {
+   const ecoUserAlerts = [];
+   ecoUserAlerts[0] = 'Recycling one aluminum can save enough energy to run a TV for three hours.';
+   ecoUserAlerts[1] = 'Around 25,000 trees are cut down each day just to produce toilet paper.';
+   ecoUserAlerts[2] = 'Approximately five million tons of oil produced in the world each year ends up in the ocean.';
+   ecoUserAlerts[3] = ' Seventy-eight percent of marine mammals are threatened by accidental deaths, such as getting caught in fishing nets.';
+   ecoUserAlerts[4] = 'A glass bottle can take 4,000 years to decompose.';
+   ecoUserAlerts[5] = 'Rainforests are being cut down at a rate of 100 acres per minute.';
+   ecoUserAlerts[6] = 'he United States is the No. 1 trash-producing country in the world.';
+   ecoUserAlerts[7] = '8. Ford Motor Company has said that 75 percent of every vehicle is recyclable.';
+   ecoUserAlerts[8] = 'If the entire world lived like the average American, we’d need five planets to provide enough resources.';
+ }
+
 formSubmitEvent = (newEcopoint) => {
   const { isEditing, editId } = this.state;
   if (isEditing) {
@@ -175,6 +187,7 @@ render() {
         deleteSingleEcopoint={this.deleteOne}
         passEcopointToEdit={this.passEcopointToEdit}
         onListingSelection={this.ecopointSelectEvent}
+        ecoAlerts= {this.ecoAlerts}
         />
       </div>
       <div className="row">
@@ -187,11 +200,7 @@ render() {
     </div>
 <div className="row">
  <Friends
- pendingFriendshipsCards= {this.pendingFriendshipsCards}
- myFriendsCards = {this.myFriendsCards}
- myFriends = {this.myFriends}
- friendshipOver = {this.friendshipOver}
- confirmFriendship = {this.confirmFriendship}
+ friends= {this.state.authed}
  />
  </div>
     </div>

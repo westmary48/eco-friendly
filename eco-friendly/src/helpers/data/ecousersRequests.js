@@ -25,7 +25,7 @@ const getEcoUserByUid = uid => new Promise((resolve, reject) => {
 });
 
 const getAllUsers = () => new Promise((resolve, reject) => {
-  axios.get(`${firebaseUrl}/users.json`)
+  axios.get(`${firebaseUrl}/ecousers.json`)
     .then((result) => {
       const userObject = result.data;
       const userArray = [];
